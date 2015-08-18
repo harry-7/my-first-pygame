@@ -167,10 +167,13 @@ class Board:
         start=rand(9,14)
         length=rand(7,12)
         h1=rand(start+1,start+2)
-        h2=rand(h1+2,start+length-1)
+        h2=rand(h1+2,start+length-2)
 
         for i in range(length):
             self.Map[3][start+i]=1
+        self.Map[2][start+length-1]=1
+        self.Map[2][start]=1
+        self.Map[3][start+length-1]=1
         for i in range(3,6):
             self.Map[i][h1]=3
             self.Map[i][h2]=3

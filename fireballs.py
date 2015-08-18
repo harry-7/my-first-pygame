@@ -142,8 +142,6 @@ class FireballUtil:
                             break
                     y=game.Ypos[j]-1
                 self.side[i]=rand(0,1)
-
-
             game.Map[y][x]+=5
 
             self.Xpos[i]=x

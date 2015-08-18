@@ -59,7 +59,7 @@ class Gameloader:
 
     
         display=pygame.display.set_mode((0,0),pygame.FULLSCREEN)
-        image=pygame.image.load('Instructions.png').convert()
+        image=pygame.image.load('Instructions.jpg').convert()
         rect=image.get_rect()
         rect.move(0,0)
         display.blit(image,rect)
@@ -108,7 +108,7 @@ class Gameloader:
 	    game.DrawLadder(surface)
 
 	    # Main loop for Game
-
+            xdiff=0
 	    while not gameExit:
 
     	    #Filling display with a required color
@@ -130,12 +130,12 @@ class Gameloader:
 	        #The Keys pressed will have a value 1
 	
 	        states=pygame.key.get_pressed()
-	    
+	        
 	        #If the player is in Jump implement
                 if states[pygame.K_q]:
 		    GameEnd=True
 		    break
-	        if injump or states[pygame.K_SPACE]:
+	        if injump or states[pygame.K_SPACE]==1:
 	            if game.Map[y][x+1]==1 or game.Map[y][x-1]==1:pass
                     mycnt=0
                     myfl=True
@@ -149,13 +149,19 @@ class Gameloader:
                     else:
                         if not injump:
 	                    injump=True
+                            if states[pygame.K_a]==1:
+                                xdiff=-1
+                                player.side=1
+                            elif states[pygame.K_d]==1:
+                                xdiff=1
+                                player.side=0
 	                    cnt=1
 	                else: cnt+=1
 	                if cnt<3:player.ypos-=1
 	                elif cnt>3:player.ypos+=1
-                        if player.side==0:player.xpos+=1
-	                else:player.xpos-=1
-	                if cnt==5:
+	                player.xpos+=xdiff
+                        if cnt==5:
+                            xdiff=0
 	                    injump=False
 	    
                 #To move left 
@@ -316,14 +322,14 @@ class Gameloader:
                 image=myfont.render("Level: "+str(level1),1,(255,255,255))
                 display.blit(image,[200,620])
 	        pygame.display.update()
-	        clock.tick(15)
+	        clock.tick(12)
 	        st+=1
 	        st%=64
 
         #Displaying Final Words 
 
         display=pygame.display.set_mode((0,0),pygame.FULLSCREEN)
-        image=pygame.image.load('FinalWords.png').convert()
+        image=pygame.image.load('FinalWords.jpg').convert()
         rect=image.get_rect()
         rect.move(0,0)
         display.blit(image,rect)
