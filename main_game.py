@@ -256,7 +256,8 @@ class Gameloader:
                 
                 #Genereating Fireballs
 	    
-                if st%level==1: fireballs.Makefireballs(game.Map,monkey.xpos+1,game.Ypos[0]-1)
+                if st%level==1 or (level1<5 and player.ypos==5 and st%(level/2)==1): fireballs.Makefireballs(game.Map,monkey.xpos+1,game.Ypos[0]-1)
+
 	    
 	        #Moving Fireballs
 		    
