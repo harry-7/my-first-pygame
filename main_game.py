@@ -318,7 +318,7 @@ class Gameloader:
                         rect.move(0,0)
                         display.blit(image,rect)
                         pygame.display.update()
-                
+                    time.sleep(0.5)
                     #Checking Whether game has completed or not 
                 
                     if level1>4:
