@@ -113,6 +113,7 @@ class Board:
             i+=1
         xpos=self.Xpos[3]+rand(2,30)
         ypos=self.Ypos[3]
+        if self.Map[ypos-1][xpos]==3:xpos+=2
         for j in range(6):
                 self.Map[min(ypos+j,28)][xpos]=3
         i=0
@@ -129,7 +130,6 @@ class Board:
                 if j!=mis:self.Map[min(ypos+j,28)][xpos]=3
             i+=1
             
-
     def DrawWalls(self,display):
         
         """ This Method Draws Walls and Floors to the Display """

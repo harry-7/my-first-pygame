@@ -38,8 +38,6 @@ class Gameloader:
 
         """ This method runs the Game """
 
-        #Initialising pygame display 
-        pygame.init()
 
         #Setting caption for window
 
@@ -64,6 +62,7 @@ class Gameloader:
         rect.move(0,0)
         display.blit(image,rect)
         pygame.display.update()
+        died=pygame.image.load('Died.jpg').convert()
         complete=pygame.image.load('Completion.png').convert()
         success=pygame.image.load('Success.png').convert()
 
@@ -224,17 +223,20 @@ class Gameloader:
                 fl=player.checkCollision(game.Map)
 	        if fl==3:
 		    GameEnd=True
-                    break
-
+                    brea1024
 	        elif fl==1:pass
 	    
                 else:
-                    time.sleep(1)
+                    rect=died.get_rect()
+                    rect.move(0,0)
+                    display.blit(died,rect)
+                    pygame.display.update()
 	            player.ypos=28
 	            player.xpos=2
 	            injump=False
 	            cnt=0
 	            player.side=0
+                    time.sleep(2)
 	    
                 x=player.xpos
 	        y=player.ypos
@@ -301,12 +303,16 @@ class Gameloader:
                 elif fl==1: pass
 	    
                 else:
-                    time.sleep(1)
+                    rect=died.get_rect()
+                    rect.move(0,0)
+                    display.blit(died,rect)
+                    pygame.display.update()
 	            player.ypos=28
 	            player.xpos=2
 	            injump=False
 	            cnt=0
 	            player.side=0
+                    time.sleep(2)
 
 	        #Moving the Monkey
 	
@@ -327,23 +333,46 @@ class Gameloader:
 	        pygame.display.update()
 	        clock.tick(12)
 	        st+=1
-	        st%=64
+	        st%=1024
 
         #Displaying Final Words 
-
-        display=pygame.display.set_mode((0,0),pygame.FULLSCREEN)
+        
         image=pygame.image.load('FinalWords.jpg').convert()
+        fl=False
         rect=image.get_rect()
         rect.move(0,0)
-        display.blit(image,rect)
+	pygame.display.update()
+        myfl=False
+        while not fl:
+	    for i in pygame.event.get():
+	        if i.type==pygame.QUIT:
+                    return False
+                if i.type==pygame.KEYDOWN:
+                    myfl=True
+                    break
+            if myfl==True:
+                states=pygame.key.get_pressed()
+                if states[pygame.K_q]==1:
+                    fl=True
+                if states[pygame.K_r]==1:
+                    return True
+            rect=image.get_rect()
+            rect.move(0,0)
+            display.blit(image,rect)
+            pygame.display.update()
+        
+        return False
 
-        pygame.display.update()
-        time.sleep(3)
-        
-        #Quitting
-        
-        pygame.quit()
 if __name__=="__main__":
+    
+    #Initialising pygame display 
+    pygame.init()
+    
     Game=Gameloader()
-    Game.Gameloop()
+    fl=Game.Gameloop()
+    while fl==True:
+        fl=Game.Gameloop()
+    
+    #Quitting   
+    pygame.quit()
     exit(0)
