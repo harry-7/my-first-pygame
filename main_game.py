@@ -67,7 +67,7 @@ class Gameloader:
         success=pygame.image.load('Success.png').convert()
 
         time.sleep(5)
-        level=1024
+        level=512
         level1=1
         display=pygame.display.set_mode((0,0),pygame.FULLSCREEN)
         myfont=pygame.font.SysFont("Monaco",15)
@@ -172,7 +172,7 @@ class Gameloader:
                         if game.Map[y][x]==3:mycnt+=1
                         if game.Map[y+1][x]==3:mycnt+=1
                         if game.Map[y-1][x]==3:mycnt+=1
-                        if mycnt>=2 and game.Map[y+1][x-1]!=1 :pass
+                        if mycnt>=2 and game.Map[y+1][x-1]==0 :pass
                         else:
                             player.xpos-=1
 	                    player.side=1
@@ -186,7 +186,7 @@ class Gameloader:
                         if game.Map[y][x]==3:mycnt+=1
                         if game.Map[y+1][x]==3:mycnt+=1
                         if game.Map[y-1][x]==3:mycnt+=1
-                        if mycnt>=2 and game.Map[y+1][x-1]!=1 :pass
+                        if mycnt>=2 and game.Map[y+1][x-1]==0 :pass
                         else:
 	                    player.xpos+=1
 	                    player.side=0
@@ -223,7 +223,12 @@ class Gameloader:
                 fl=player.checkCollision(game.Map)
 	        if fl==3:
 		    GameEnd=True
-                    brea1024
+                    rect=died.get_rect()
+                    rect.move(0,0)
+                    display.blit(died,rect)
+                    pygame.display.update()
+                    time.sleep(2)
+                    break
 	        elif fl==1:pass
 	    
                 else:
@@ -298,6 +303,11 @@ class Gameloader:
                 fl=player.checkCollision(game.Map)
                 if fl==3: 
 		    GameEnd=True
+                    rect=died.get_rect()
+                    rect.move(0,0)
+                    display.blit(died,rect)
+                    pygame.display.update()
+                    time.sleep(2)
 		    break
 	    
                 elif fl==1: pass
@@ -333,7 +343,7 @@ class Gameloader:
 	        pygame.display.update()
 	        clock.tick(12)
 	        st+=1
-	        st%=1024
+	        st%=256
 
         #Displaying Final Words 
         
@@ -343,6 +353,7 @@ class Gameloader:
         rect.move(0,0)
 	pygame.display.update()
         myfl=False
+        time.sleep(1)
         while not fl:
 	    for i in pygame.event.get():
 	        if i.type==pygame.QUIT:
