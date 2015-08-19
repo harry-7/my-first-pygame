@@ -29,7 +29,7 @@ class Person:
         
         Default constructor of this class 
         xpos has xco-ordinate of person similarly ypos
-        side denotes his present moovment
+        side denotes his direction of present moovment
         
         """
         

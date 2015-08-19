@@ -136,7 +136,7 @@ class Board:
         
         x=15
         y=20
-        image=pygame.image.load('wall1.jpg').convert()
+        image=pygame.image.load('wall.jpg').convert()
         image=pygame.transform.scale(image,(15,20))
         for i in xrange(30):
             for j in range(80):
