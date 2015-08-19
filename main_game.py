@@ -17,6 +17,10 @@ Map values for
 """
 
 __author__="Hemanth Kumar Veeranki"
+__version__ = "1.0.1"
+__maintainer__ = "Hemanth Kumar Veeranki"
+__email__ = "hemanth.veeranki@students.iiit.ac.in"
+__status__ = "Development"
 
 # Importing modules required
 
@@ -320,6 +324,7 @@ class Gameloader:
                         rect.move(0,0)
                         display.blit(image,rect)
                         pygame.display.update()
+                    
                     #time.sleep(1)
                     #Checking Whether game has completed or not 
                 

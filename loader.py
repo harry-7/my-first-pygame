@@ -10,6 +10,10 @@ import pygame
 from random import randint as rand
 
 __author__="Hemanth Kumar Veeranki"
+__version__ = "1.0.1"
+__maintainer__ = "Hemanth Kumar Veeranki"
+__email__ = "hemanth.veeranki@students.iiit.ac.in"
+__status__ = "Development"
 
 """
 
