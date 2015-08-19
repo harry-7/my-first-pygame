@@ -221,7 +221,8 @@ class Gameloader:
 	        #To get down a ladder
 	
 	        elif states[pygame.K_s]:
-	            if game.Map[y+1][x]==3 or (game.Map[y][x]==3 and game.Map[y][x+1]==1 or game.Map[y][x-1]==1):
+                    if game.Map[y][x]==3 and game.Map[y+1][x]==0:pass
+	            elif game.Map[y+1][x]==3 or (game.Map[y][x]==3 and game.Map[y][x+1]==1 or game.Map[y][x-1]==1):
 	                player.ypos+=1
 	    
 	        #Checking whether there is a collision with the wall
@@ -267,7 +268,7 @@ class Gameloader:
 	        y=player.ypos
 	        #Checking whether the player has crossed the limit of floor and in air 
 	
-	        if not injump and game.Map[y+1][x]==0:
+	        if not injump and game.Map[y][x]==0 and game.Map[y+1][x]==0:
                     if y ==23 : y=28
                     else:
                         for i in xrange(4):
@@ -305,6 +306,7 @@ class Gameloader:
                     display.blit(success,rect)
                     pygame.display.update()
                     time.sleep(2)
+                    myfl=False
                     while True:
 	                for i in pygame.event.get():
 	                    if i.type==pygame.QUIT:
@@ -314,11 +316,11 @@ class Gameloader:
                                 break
                         if myfl==True:
                                 states=pygame.key.get_pressed()
-                        if 1 in states:break
+                                if 1 in states:break
                         rect.move(0,0)
                         display.blit(image,rect)
                         pygame.display.update()
-                    time.sleep(0.5)
+                    #time.sleep(1)
                     #Checking Whether game has completed or not 
                 
                     if level1>4:
