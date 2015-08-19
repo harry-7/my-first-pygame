@@ -229,10 +229,12 @@ class Gameloader:
 	        elif fl==1:pass
 	    
                 else:
+                    time.sleep(1)
 	            player.ypos=28
 	            player.xpos=2
 	            injump=False
-                    player.side=0
+	            cnt=0
+	            player.side=0
 	    
                 x=player.xpos
 	        y=player.ypos
@@ -299,6 +301,7 @@ class Gameloader:
                 elif fl==1: pass
 	    
                 else:
+                    time.sleep(1)
 	            player.ypos=28
 	            player.xpos=2
 	            injump=False
