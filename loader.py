@@ -9,6 +9,8 @@
 import pygame
 from random import randint as rand
 
+__author__="Hemanth Kumar Veeranki"
+
 """
 
 Map values for 

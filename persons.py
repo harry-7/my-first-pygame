@@ -19,6 +19,8 @@ Map values for
 import pygame
 
 
+__author__="Hemanth Kumar Veeranki"
+
 class Person:
 
     """ This is the super class for Player class and Donkey class """

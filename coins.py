@@ -8,6 +8,8 @@
 from random import randint as rand
 import pygame 
 
+__author__="Hemanth Kumar Veeranki"
+
 class CoinUtil:
 
     """ This class takes care of creating and displaying coins """

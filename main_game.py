@@ -16,6 +16,8 @@ Map values for
 
 """
 
+__author__="Hemanth Kumar Veeranki"
+
 # Importing modules required
 
 import pygame
@@ -55,18 +57,36 @@ class Gameloader:
         monkey=Donkey(2,5)
         GameEnd=False
 
-    
         display=pygame.display.set_mode((0,0),pygame.FULLSCREEN)
+        #Loading Images required 
+        died=pygame.image.load('Died.jpg').convert()
+        
+        complete=pygame.image.load('Completion.png').convert()
+        
+        success=pygame.image.load('Success.png').convert()
+        
+        #Displaying Instructions
+
         image=pygame.image.load('Instructions.jpg').convert()
         rect=image.get_rect()
         rect.move(0,0)
         display.blit(image,rect)
         pygame.display.update()
-        died=pygame.image.load('Died.jpg').convert()
-        complete=pygame.image.load('Completion.png').convert()
-        success=pygame.image.load('Success.png').convert()
-
-        time.sleep(5)
+        myfl=False 
+        while True:
+	    for i in pygame.event.get():
+	        if i.type==pygame.QUIT:
+                    return False
+                if i.type==pygame.KEYDOWN:
+                    myfl=True
+                    break
+            if myfl==True:
+                states=pygame.key.get_pressed()
+                if 1 in states:break
+            rect.move(0,0)
+            display.blit(image,rect)
+            pygame.display.update()
+        
         level=512
         level1=1
         display=pygame.display.set_mode((0,0),pygame.FULLSCREEN)
@@ -284,7 +304,20 @@ class Gameloader:
                     rect.move(0,0)
                     display.blit(success,rect)
                     pygame.display.update()
-                    time.sleep(1)
+                    time.sleep(2)
+                    while True:
+	                for i in pygame.event.get():
+	                    if i.type==pygame.QUIT:
+                                return False
+                            if i.type==pygame.KEYDOWN:
+                                myfl=True
+                                break
+                        if myfl==True:
+                                states=pygame.key.get_pressed()
+                        if 1 in states:break
+                        rect.move(0,0)
+                        display.blit(image,rect)
+                        pygame.display.update()
                 
                     #Checking Whether game has completed or not 
                 
