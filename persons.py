@@ -51,9 +51,10 @@ class Person:
         
         """ We will modify this in derived class according to images"""
         
-        x=self.xpos
-        y=self.ypos
-
+        raise NotImplementedError("Subclass must implement abstract method")
+        
+    def getPosition(self):
+        return self.xpos,self.ypos
 class Player(Person):
     
     """ This class takes care of methods related to player """
@@ -113,9 +114,15 @@ class Player(Person):
         
         """ This function displays the lifes left and it takes display surface as a parameter """
         
-        myfont=pygame.font.SysFont("Monospace",15)
-        image=myfont.render("You have "+str(self.__lifes)+" lifes left.",1,(255,255,255))
-        display.blit(image,[200,660])
+        myfont = pygame.font.SysFont("Monospace", 15)
+        image=pygame.image.load('Life.jpg')
+        image=pygame.transform.scale(image,(100,30))
+        display.blit(image,[300,660])
+
+        image=pygame.image.load('lifes.jpg')
+        image=pygame.transform.scale(image,(30,30))
+        for i in range(self.__lifes):
+            display.blit(image,[400+i*25,665])
         
 
     def collectCoin(self,Map):

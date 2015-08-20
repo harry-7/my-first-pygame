@@ -27,7 +27,7 @@ __status__ = "Development"
 import pygame
 from loader import Board
 from coins import CoinUtil
-from fireballs import FireballUtil
+from fireballs import Fireball
 from persons import *
 import time
 
@@ -95,7 +95,7 @@ class Gameloader:
         level1=1
         display=pygame.display.set_mode((0,0),pygame.FULLSCREEN)
         myfont=pygame.font.SysFont("Monaco",15)
-
+        inFall=False
         while not GameEnd:
 
 	    #Initialising Board and creating Walls Floors Princess and Ladders
@@ -110,7 +110,7 @@ class Gameloader:
             #Creating Instances of Utilities to deal with Coins and Fireballs
 
             coins=CoinUtil()
-	    fireballs=FireballUtil()
+	    fireballs=Fireball()
 
 	    #Generating Coins in each floor
 
@@ -139,8 +139,7 @@ class Gameloader:
     	        display.fill(BLACK)    
 
 	    #Marking positions of player to check conditions
-                x=player.xpos
-	        y=player.ypos
+                x,y=player.getPosition()
 	     
 	        #Checking whether close button is pressed
 
@@ -158,7 +157,12 @@ class Gameloader:
                 if states[pygame.K_q]:
 		    GameEnd=True
 		    break
-	        if injump or states[pygame.K_SPACE]==1:
+                if inFall:
+                    player.ypos+=1
+                    y+=1
+                    if game.Map[y+1][x]!=0:
+                        inFall=False
+	        elif injump or states[pygame.K_SPACE]==1:
 	            if game.Map[y][x+1]==1 or game.Map[y][x-1]==1:pass
                     mycnt=0
                     myfl=True
@@ -272,12 +276,8 @@ class Gameloader:
 	        y=player.ypos
 	        #Checking whether the player has crossed the limit of floor and in air 
 	
-	        if not injump and game.Map[y][x]==0 and game.Map[y+1][x]==0:
-                    if y ==23 : y=28
-                    else:
-                        for i in xrange(4):
-                            if game.Ypos[i] > y+1 :break
-                        y=(game.Ypos[i]-1)
+	        if not inFall and not injump and game.Map[y][x]==0 and game.Map[y+1][x]==0:
+                    inFall=True
                 
                 #Genereating Fireballs
 	    
@@ -309,7 +309,7 @@ class Gameloader:
                     rect.move(0,0)
                     display.blit(success,rect)
                     pygame.display.update()
-                    time.sleep(2)
+                    time.sleep(1)
                     myfl=False
                     while True:
 	                for i in pygame.event.get():
@@ -324,6 +324,7 @@ class Gameloader:
                         rect.move(0,0)
                         display.blit(image,rect)
                         pygame.display.update()
+                    time.sleep(1)
                     
                     #time.sleep(1)
                     #Checking Whether game has completed or not 
@@ -394,7 +395,7 @@ class Gameloader:
         rect.move(0,0)
 	pygame.display.update()
         myfl=False
-        time.sleep(1)
+        time.sleep(0.5)
         while not fl:
 	    for i in pygame.event.get():
 	        if i.type==pygame.QUIT:

@@ -25,7 +25,7 @@ __maintainer__ = "Hemanth Kumar Veeranki"
 __email__ = "hemanth.veeranki@students.iiit.ac.in"
 __status__ = "Development"
 
-class FireballUtil:
+class Fireball:
 
     """ This Class basically deals with all tasks of Fireballs """
 
@@ -40,6 +40,7 @@ class FireballUtil:
         self.Xpos=[]
         self.Ypos=[]
         self.side=[]
+        self.infall=[]
         self.image=pygame.image.load('fireball.jpg')
         self.image=pygame.transform.scale(self.image,(15,20))
         self.rect=self.image.get_rect()
@@ -59,6 +60,7 @@ class FireballUtil:
             self.Xpos.append(xpos)
             self.Ypos.append(ypos)
             self.side.append(1)
+            self.infall.append(0)
 
     def DrawFireball(self,Map,display):
         
@@ -103,8 +105,11 @@ class FireballUtil:
             p=rand(0,1)
             
             # Taking care of Ladders and getting down through a ladder
-
-            if p==1 and  game.Map[y+1][x]==3:
+            if self.infall[i]==1:
+                y+=1
+                if game.Map[y+1][x]!=0:
+                    self.infall[i]=0
+            elif p==1 and  game.Map[y+1][x]==3:
                 y+=1
                 if self.checkWall(game.Map,x,y):
                     y-=1
@@ -138,15 +143,8 @@ class FireballUtil:
                     x+=2
                     self.side[i]=1
         
-            if game.Map[y][x]==0 and game.Map[y+1][x]==0:
-                height=y+1
-                if y == 23 :y=28
-                else:
-                    for j in range(4):
-                        if game.Ypos[j]>height:
-                            break
-                    y=game.Ypos[j]-1
-                self.side[i]=rand(0,1)
+            if self.infall[i]!=1 and game.Map[y][x]==0 and game.Map[y+1][x]==0:
+                self.infall[i]=1
             game.Map[y][x]+=5
 
             self.Xpos[i]=x
