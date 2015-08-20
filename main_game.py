@@ -53,7 +53,6 @@ class Gameloader:
 
         BLACK=(0,0,0)
         clock=pygame.time.Clock()
-        FPS=60
 
         #Creating an Instance of Player and Monkey
 
@@ -62,7 +61,9 @@ class Gameloader:
         GameEnd=False
 
         display=pygame.display.set_mode((0,0),pygame.FULLSCREEN)
+        
         #Loading Images required 
+        
         died=pygame.image.load('Died.jpg').convert()
         
         complete=pygame.image.load('Completion.png').convert()

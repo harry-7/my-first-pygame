@@ -158,6 +158,7 @@ class Fireball:
                 self.Xpos.pop(i-j)
                 self.Ypos.pop(i-j)
                 self.side.pop(i-j)
+                self.infall.pop(i-j)
                 j+=1
         
         #Same as above 
