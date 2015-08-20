@@ -114,15 +114,10 @@ class Player(Person):
         
         """ This function displays the lifes left and it takes display surface as a parameter """
         
-        myfont = pygame.font.SysFont("Monospace", 15)
-        image=pygame.image.load('Life.jpg')
-        image=pygame.transform.scale(image,(100,30))
-        display.blit(image,[300,660])
-
         image=pygame.image.load('lifes.jpg')
-        image=pygame.transform.scale(image,(30,30))
+        image=pygame.transform.scale(image,(60,60))
         for i in range(self.__lifes):
-            display.blit(image,[400+i*25,665])
+            display.blit(image,[400+i*55,665])
         
 
     def collectCoin(self,Map):
