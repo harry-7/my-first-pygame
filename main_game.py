@@ -160,7 +160,7 @@ class Gameloader:
                 if inFall:
                     player.ypos+=1
                     y+=1
-                    if game.Map[y+1][x]!=0:
+                    if game.Map[y+1][x]!=0 and game.Map[y+1][x]!=2:
                         inFall=False
 	        elif injump or states[pygame.K_SPACE]==1:
 	            if game.Map[y][x+1]==1 or game.Map[y][x-1]==1:pass
@@ -261,6 +261,7 @@ class Gameloader:
 	        elif fl==1:pass
 	    
                 else:
+                    time.sleep(0.5)
                     rect=died.get_rect()
                     rect.move(0,0)
                     display.blit(died,rect)
@@ -355,6 +356,7 @@ class Gameloader:
                 elif fl==1: pass
 	    
                 else:
+                    time.sleep(0.5)
                     rect=died.get_rect()
                     rect.move(0,0)
                     display.blit(died,rect)

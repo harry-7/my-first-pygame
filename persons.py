@@ -130,7 +130,7 @@ class Player(Person):
         
         if Map[y][x]==2:
             Map[y][x]=0
-            self.__score+=20
+            self.__score+=5
     
     def checkCollision(self,Map):
 
